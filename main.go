@@ -269,6 +269,11 @@ func getDurationString(srcFile string) (string, error) {
 
 var homeDir string
 
+func init() {
+	homeDir, _ = os.UserHomeDir()
+	fmt.Println("homeDir:", homeDir)
+}
+
 func main() {
 	// 示例配置
 	// inputFile := "ESL0001 - Introducing Yourself.mp3" // 输入音频文件
@@ -299,9 +304,8 @@ func main() {
 
 	// fmt.Println("切割完成")
 
-	homeDir, _ = os.UserHomeDir()
-
-	reader := &XlsxReader{path: homeDir + "/Music/iTunes/iTunes Media/Music/eslpod/eslpod1-50/templet.xlsx"}
+	// reader := &XlsxReader{path: homeDir + "/Music/iTunes/iTunes Media/Music/eslpod/eslpod1-50/templet.xlsx"}
+	reader := &XlsxReader{path: "./templet.xlsx"}
 	chunks, err := reader.Read()
 	if err != nil {
 		fmt.Println("read fail")

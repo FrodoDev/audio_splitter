@@ -116,13 +116,17 @@ func (x *XlsxReader) Decode() {
 
 		chunk := Chunk{}
 		chunk.InputPath = x.rows[i][0]
+		chunk.InputPath = strings.ReplaceAll(chunk.InputPath, "homeDir", homeDir)
 		chunk.Name = x.rows[i][1]
 		s1s := strings.Split(x.rows[i][2], ",")
+		op := strings.ReplaceAll(s1s[3], "homeDir", homeDir)
 		chunk.SegList = append(chunk.SegList,
-			segment{startTime: s1s[0], endTime: s1s[1], suffixName: s1s[2], outputPath: s1s[3]})
+			segment{startTime: s1s[0], endTime: s1s[1], suffixName: s1s[2], outputPath: op})
+
 		s2s := strings.Split(x.rows[i][3], ",")
+		op = strings.ReplaceAll(s2s[3], "homeDir", homeDir)
 		chunk.SegList = append(chunk.SegList,
-			segment{startTime: s2s[0], endTime: s2s[1], suffixName: s2s[2], outputPath: s2s[3]})
+			segment{startTime: s2s[0], endTime: s2s[1], suffixName: s2s[2], outputPath: op})
 
 		x.chunk = append(x.chunk, chunk)
 	}
