@@ -79,7 +79,7 @@ func (x *XlsxReader) Read() ([]Chunk, error) {
 func (x *XlsxReader) Valid(i int) (valid bool, reason error) {
 	row := x.rows[i]
 	if len(row) != 4 {
-		reason = fmt.Errorf("row %d not equal 5", i)
+		reason = fmt.Errorf("row %d not equal 4", i)
 		return
 	}
 
@@ -121,12 +121,24 @@ func (x *XlsxReader) Decode() {
 		s1s := strings.Split(x.rows[i][2], ",")
 		op := strings.ReplaceAll(s1s[3], "homeDir", homeDir)
 		chunk.SegList = append(chunk.SegList,
-			segment{startTime: s1s[0], endTime: s1s[1], suffixName: s1s[2], outputPath: op})
+			segment{
+				startTime:  s1s[0],
+				endTime:    s1s[1],
+				suffixName: s1s[2],
+				outputPath: op,
+				// lyrics:     s1s[4],
+			})
 
 		s2s := strings.Split(x.rows[i][3], ",")
 		op = strings.ReplaceAll(s2s[3], "homeDir", homeDir)
 		chunk.SegList = append(chunk.SegList,
-			segment{startTime: s2s[0], endTime: s2s[1], suffixName: s2s[2], outputPath: op})
+			segment{
+				startTime:  s2s[0],
+				endTime:    s2s[1],
+				suffixName: s2s[2],
+				outputPath: op,
+				// lyrics:     s2s[4],
+			})
 
 		x.chunk = append(x.chunk, chunk)
 	}

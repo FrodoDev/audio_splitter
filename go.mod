@@ -3,6 +3,7 @@ module github.com/FrodoDev/audio_splitter
 go 1.24.5
 
 require (
+	github.com/bogem/id3v2 v1.2.0
 	github.com/mikkyang/id3-go v0.0.0-20191012064224-2c6ab3bb1fbd
 	github.com/xuri/excelize/v2 v2.9.1
 	golang.org/x/text v0.28.0
